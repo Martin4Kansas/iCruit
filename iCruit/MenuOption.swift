@@ -3,7 +3,7 @@ import UIKit
 struct MenuOption {
   
   static var leftBuffer = "  ";
-  static var rightBuffer = "                   ";
+  static var rightBuffer = "             ";
   
   let title: String
   

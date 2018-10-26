@@ -25,6 +25,7 @@ class ContainerViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
     centerViewController = UIStoryboard.centerViewController()
     centerViewController.delegate = self
     

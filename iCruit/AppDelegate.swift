@@ -13,6 +13,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     window!.rootViewController = containerViewController
     window!.makeKeyAndVisible()
     
+    let defaults = UserDefaults.standard
+    let defaultCompanyName = ["CompanyName" : "iCruit"]
+    defaults.register(defaults: defaultCompanyName)
+    
+    
     return true
   }
 }

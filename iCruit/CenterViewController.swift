@@ -12,18 +12,50 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
   }
   override func viewDidLoad() {
       super.viewDidLoad()
+      mainViewVariables.color = UIColor.black
+      let colorString = UserDefaults.standard.string(forKey: "Color")
+      switch colorString {
+        case "Black":
+          mainViewVariables.color = UIColor.black
+        case "Blue":
+          mainViewVariables.color = UIColor.blue
+        case "Brown":
+          mainViewVariables.color = UIColor.brown
+        case "Cyan":
+          mainViewVariables.color = UIColor.cyan
+        case "Dark Gray":
+          mainViewVariables.color = UIColor.darkGray
+        case "Gray":
+          mainViewVariables.color = UIColor.gray
+        case "Green":
+          mainViewVariables.color = UIColor.green
+        case "Light Grey":
+          mainViewVariables.color = UIColor.lightGray
+        case "Magenta":
+          mainViewVariables.color = UIColor.magenta
+        case "Orange":
+          mainViewVariables.color = UIColor.orange
+        case "Purple":
+          mainViewVariables.color = UIColor.purple
+        case "Red":
+          mainViewVariables.color = UIColor.red
+        case "Yellow":
+          mainViewVariables.color = UIColor.yellow
+        default:
+          mainViewVariables.color = UIColor.black
+      }
       editButton.setTitleTextAttributes([
       NSAttributedStringKey.font: UIFont(name: "Helvetica-Bold", size: 26.0)!,
-      NSAttributedStringKey.foregroundColor: UIColor.black],
+      NSAttributedStringKey.foregroundColor: UIColor.darkGray],
                                       for: .normal)
       adminButton.setTitleTextAttributes([
       NSAttributedStringKey.font: UIFont(name: "Helvetica-Bold", size: 26.0)!,
-      NSAttributedStringKey.foregroundColor: UIColor.black],
+      NSAttributedStringKey.foregroundColor: UIColor.darkGray],
                                       for: .normal)
       let titleLabel = UILabel(frame: CGRect(x: 10, y: 50, width: 230, height: 21))
       titleLabel.textAlignment = .center //For center alignment
       titleLabel.text = mainViewVariables.title
-      titleLabel.textColor = .black
+      titleLabel.textColor = mainViewVariables.color
       titleLabel.font = UIFont(name: "Helvetica-Bold", size: 30.0)
       topBar.titleView = titleLabel
       mainMenu.dataSource = self
@@ -55,13 +87,31 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
       return cell
     }
     else if (mainViewVariables.mainMenuOptions[indexPath.row].type == "Submission") {
-      let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.MainMenuButtonCell, for: indexPath) as! MainMenuButton
-      cell.configureForMainMenuButton(mainViewVariables.mainMenuOptions[indexPath.row])
+      let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.MainMenuOptionCell, for: indexPath) as! MainMenuOptionCell
+      cell.configureForMainMenuOption(mainViewVariables.mainMenuOptions[indexPath.row])
       return cell
     }
-    let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.MainMenuOptionCell, for: indexPath) as! MainMenuOptionCell
-    cell.configureForMainMenuOption(mainViewVariables.mainMenuOptions[indexPath.row])
-    return cell
+    else {
+      let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.MainMenuOptionCell, for: indexPath) as! MainMenuOptionCell
+      cell.configureForMainMenuOption(mainViewVariables.mainMenuOptions[indexPath.row])
+      return cell
+    }
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let mainMenuOption = mainViewVariables.mainMenuOptions[indexPath.row]
+    if (mainMenuOption.type == "ColorSelection") {
+      let title = mainMenuOption.title
+      let defaults = UserDefaults.standard
+      defaults.set(title, forKey:"SelectedColor")
+    }
+    if (mainMenuOption.type == "Submission") {
+      let defaults = UserDefaults.standard
+      let selected = defaults.string(forKey: "SelectedColor")
+      defaults.set(selected, forKey: "Color")
+      self.mainMenu.reloadData()
+      viewDidLoad()
+    }
   }
   
 }
@@ -69,6 +119,7 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
 struct mainViewVariables{
     static var title = "iCruit"
     static var mainMenuOptions = [MainMenuOption(title:"Welcome to iCruit", type:"WelcomeMessage")]
+    static var color = UIColor.black
 }
 
 extension CenterViewController: SidePanelViewControllerDelegate {
@@ -92,18 +143,4 @@ extension CenterViewController: SidePanelViewControllerDelegate {
     viewDidLoad()
   }
 }
-
-/*extension CenterViewController: UITableViewDataSource {
-
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return mainMenuOptions.count
-  }
-  
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.MainMenuOptionCell, for: indexPath) as! MainMenuOptionCell
-    cell.configureForMainMenuOption(mainMenuOptions[indexPath.row])
-    return cell
-  }
-}
- */
 

@@ -39,5 +39,10 @@ class MainMenuOptionCell: UITableViewCell {
         mainMenuOptionLabel.textColor = UIColor.black
       }
     }
+    else if (mainMenuOption.type == "Submission") {
+      mainMenuOptionLabel.textColor = UIColor.black
+      mainMenuOptionLabel.font = UIFont(name: "Helvetica-Bold", size: 30.0)
+    }
   }
+  
 }

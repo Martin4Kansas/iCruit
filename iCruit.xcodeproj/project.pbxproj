@@ -21,6 +21,7 @@
 		C159287E21A48F1200A8B0CE /* MainMenuOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = C159287D21A48F1200A8B0CE /* MainMenuOption.swift */; };
 		C159288021A4917900A8B0CE /* MainMenuOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C159287F21A4917900A8B0CE /* MainMenuOptionCell.swift */; };
 		C159288221A4CACA00A8B0CE /* MainMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C159288121A4CACA00A8B0CE /* MainMenuButton.swift */; };
+		C159288421A5DDE800A8B0CE /* MainMenuTextbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = C159288321A5DDE800A8B0CE /* MainMenuTextbox.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		C159287D21A48F1200A8B0CE /* MainMenuOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuOption.swift; sourceTree = "<group>"; };
 		C159287F21A4917900A8B0CE /* MainMenuOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuOptionCell.swift; sourceTree = "<group>"; };
 		C159288121A4CACA00A8B0CE /* MainMenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuButton.swift; sourceTree = "<group>"; };
+		C159288321A5DDE800A8B0CE /* MainMenuTextbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuTextbox.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 				C159287D21A48F1200A8B0CE /* MainMenuOption.swift */,
 				C159287F21A4917900A8B0CE /* MainMenuOptionCell.swift */,
 				C159288121A4CACA00A8B0CE /* MainMenuButton.swift */,
+				C159288321A5DDE800A8B0CE /* MainMenuTextbox.swift */,
 				17C4E01E198E477C00E0B395 /* CenterViewController.swift */,
 				5F3DBC4B1FA185120077EA89 /* CenterViewControllerDelegate.swift */,
 				178B5A5C198E7379006414ED /* ContainerViewController.swift */,
@@ -180,6 +183,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C159288421A5DDE800A8B0CE /* MainMenuTextbox.swift in Sources */,
 				5F3DBC4C1FA185120077EA89 /* CenterViewControllerDelegate.swift in Sources */,
 				17C4DFD0198E428000E0B395 /* AppDelegate.swift in Sources */,
 				17C4E01B198E444000E0B395 /* MenuOption.swift in Sources */,

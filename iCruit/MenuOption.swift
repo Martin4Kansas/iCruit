@@ -14,6 +14,7 @@ struct MenuOption {
       MenuOption(title: leftBuffer + "Present", titleString: "Present"),
       MenuOption(title: leftBuffer + "Edit Questions", titleString: "Questions"),
       MenuOption(title: leftBuffer + "Edit Color", titleString: "Color"),
+      MenuOption(title: leftBuffer + "Edit Company Name", titleString: "Company"),
       MenuOption(title: leftBuffer + "View Responses", titleString: "Responses"),
       MenuOption(title: leftBuffer + "Export Data", titleString: "Export")
     ]

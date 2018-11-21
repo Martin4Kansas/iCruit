@@ -47,8 +47,33 @@
                                             <outlet property="mainMenuOptionLabel" destination="tPd-de-2Vo" id="ete-t0-a1X"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MainMenuButtonCell" rowHeight="63" id="jsz-RF-ciF" customClass="MainMenuButton" customModule="iCruit" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MainMenuTextboxCell" rowHeight="63" id="6bz-vB-DaV" customClass="MainMenuTextbox" customModule="iCruit" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="91" width="728" height="63"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6bz-vB-DaV" id="3IR-2F-1bh">
+                                            <rect key="frame" x="0.0" y="0.0" width="728" height="62.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3Jm-Cc-gq3">
+                                                    <rect key="frame" x="15" y="16" width="698" height="30"/>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="organization"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="3Jm-Cc-gq3" firstAttribute="centerY" secondItem="3IR-2F-1bh" secondAttribute="centerY" id="92z-eB-73g"/>
+                                                <constraint firstItem="3Jm-Cc-gq3" firstAttribute="height" secondItem="3IR-2F-1bh" secondAttribute="height" id="H1w-Uq-VTQ"/>
+                                                <constraint firstItem="3Jm-Cc-gq3" firstAttribute="width" secondItem="3IR-2F-1bh" secondAttribute="width" id="QVe-qw-Ol2"/>
+                                                <constraint firstItem="3Jm-Cc-gq3" firstAttribute="centerX" secondItem="3IR-2F-1bh" secondAttribute="centerX" id="ftj-Ei-1Mk"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="mainTextbox" destination="3Jm-Cc-gq3" id="G1u-RN-2KO"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MainMenuButtonCell" rowHeight="63" id="jsz-RF-ciF" customClass="MainMenuButton" customModule="iCruit" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="154" width="728" height="63"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jsz-RF-ciF" id="Zuw-dU-gGl">
                                             <rect key="frame" x="0.0" y="0.0" width="728" height="62.5"/>

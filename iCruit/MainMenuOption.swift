@@ -22,7 +22,14 @@ struct MainMenuOption {
       MainMenuOption(title: "Purple", type: "ColorSelection"),
       MainMenuOption(title: "Red", type: "ColorSelection"),
       MainMenuOption(title: "Yellow", type: "ColorSelection"),
-      MainMenuOption(title: "Submit", type: "Submission")
+      MainMenuOption(title: "Submit", type: "ColorSubmission")
+    ]
+  }
+  static func editCompanyOptions() -> [MainMenuOption] {
+    return [
+      MainMenuOption(title: "Company Name:", type: "Label"),
+      MainMenuOption(title: "", type: "Textbox"),
+      MainMenuOption(title: "Submit", type: "TextboxSubmission")
     ]
   }
 }

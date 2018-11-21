@@ -39,9 +39,42 @@ class MainMenuOptionCell: UITableViewCell {
         mainMenuOptionLabel.textColor = UIColor.black
       }
     }
-    else if (mainMenuOption.type == "Submission") {
+    else if (mainMenuOption.type == "ColorSubmission") {
       mainMenuOptionLabel.textColor = UIColor.black
       mainMenuOptionLabel.font = UIFont(name: "Helvetica-Bold", size: 30.0)
+    }
+    else {
+      let colorString = UserDefaults.standard.string(forKey: "Color")
+      switch colorString {
+      case "Black":
+        mainMenuOptionLabel.textColor = UIColor.black
+      case "Blue":
+        mainMenuOptionLabel.textColor = UIColor.blue
+      case "Brown":
+        mainMenuOptionLabel.textColor = UIColor.brown
+      case "Cyan":
+        mainMenuOptionLabel.textColor = UIColor.cyan
+      case "Dark Gray":
+        mainMenuOptionLabel.textColor = UIColor.darkGray
+      case "Gray":
+        mainMenuOptionLabel.textColor = UIColor.gray
+      case "Green":
+        mainMenuOptionLabel.textColor = UIColor.green
+      case "Light Grey":
+        mainMenuOptionLabel.textColor = UIColor.lightGray
+      case "Magenta":
+        mainMenuOptionLabel.textColor = UIColor.magenta
+      case "Orange":
+        mainMenuOptionLabel.textColor = UIColor.orange
+      case "Purple":
+        mainMenuOptionLabel.textColor = UIColor.purple
+      case "Red":
+        mainMenuOptionLabel.textColor = UIColor.red
+      case "Yellow":
+        mainMenuOptionLabel.textColor = UIColor.yellow
+      default:
+        mainMenuOptionLabel.textColor = UIColor.black
+      }
     }
   }
   

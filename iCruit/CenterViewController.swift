@@ -9,6 +9,7 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
   enum CellIdentifiers {
     static let MainMenuOptionCell = "MainMenuOptionCell"
     static let MainMenuButtonCell = "MainMenuButtonCell"
+    static let MainMenuTextboxCell = "MainMenuTextboxCell"
   }
   override func viewDidLoad() {
       super.viewDidLoad()
@@ -91,6 +92,11 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
       cell.configureForMainMenuOption(mainViewVariables.mainMenuOptions[indexPath.row])
       return cell
     }
+    else if (mainViewVariables.mainMenuOptions[indexPath.row].type == "Textbox") {
+      let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.MainMenuTextboxCell, for: indexPath) as! MainMenuTextbox
+      cell.configureForMainMenuTextbox(mainViewVariables.mainMenuOptions[indexPath.row])
+      return cell
+    }
     else {
       let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.MainMenuOptionCell, for: indexPath) as! MainMenuOptionCell
       cell.configureForMainMenuOption(mainViewVariables.mainMenuOptions[indexPath.row])
@@ -105,7 +111,7 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
       let defaults = UserDefaults.standard
       defaults.set(title, forKey:"SelectedColor")
     }
-    if (mainMenuOption.type == "Submission") {
+    else if (mainMenuOption.type == "ColorSubmission") {
       let defaults = UserDefaults.standard
       let selected = defaults.string(forKey: "SelectedColor")
       defaults.set(selected, forKey: "Color")
@@ -134,6 +140,9 @@ extension CenterViewController: SidePanelViewControllerDelegate {
     }
     if (menuOption.titleString == "Color") {
         mainViewVariables.mainMenuOptions = MainMenuOption.editColorOptions()
+    }
+    else if (menuOption.titleString == "Company") {
+      mainViewVariables.mainMenuOptions = MainMenuOption.editCompanyOptions()
     }
     else {
         mainViewVariables.mainMenuOptions = [MainMenuOption(title:"Welcome to iCruit", type:"WelcomeMessage")]

@@ -87,12 +87,12 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
       cell.configureForMainMenuOption(mainViewVariables.mainMenuOptions[indexPath.row])
       return cell
     }
-    else if (mainViewVariables.mainMenuOptions[indexPath.row].type == "Submission") {
+    else if (mainViewVariables.mainMenuOptions[indexPath.row].type == "CompanySubmission") {
       let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.MainMenuOptionCell, for: indexPath) as! MainMenuOptionCell
       cell.configureForMainMenuOption(mainViewVariables.mainMenuOptions[indexPath.row])
       return cell
     }
-    else if (mainViewVariables.mainMenuOptions[indexPath.row].type == "Textbox") {
+    else if (mainViewVariables.mainMenuOptions[indexPath.row].type == "CompanyTextbox") {
       let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.MainMenuTextboxCell, for: indexPath) as! MainMenuTextbox
       cell.configureForMainMenuTextbox(mainViewVariables.mainMenuOptions[indexPath.row])
       return cell
@@ -115,6 +115,13 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
       let defaults = UserDefaults.standard
       let selected = defaults.string(forKey: "SelectedColor")
       defaults.set(selected, forKey: "Color")
+      self.mainMenu.reloadData()
+      viewDidLoad()
+    }
+    else if (mainMenuOption.type == "CompanySubmission") {
+      let defaults = UserDefaults.standard
+      let selected = defaults.string(forKey: "SelectedName")
+      defaults.set(selected, forKey: "CompanyName")
       self.mainMenu.reloadData()
       viewDidLoad()
     }

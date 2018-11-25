@@ -28,8 +28,8 @@ struct MainMenuOption {
   static func editCompanyOptions() -> [MainMenuOption] {
     return [
       MainMenuOption(title: "Company Name:", type: "Label"),
-      MainMenuOption(title: "", type: "Textbox"),
-      MainMenuOption(title: "Submit", type: "TextboxSubmission")
+      MainMenuOption(title: "", type: "CompanyTextbox"),
+      MainMenuOption(title: "Submit", type: "CompanySubmission")
     ]
   }
 }

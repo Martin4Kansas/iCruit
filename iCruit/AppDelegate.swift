@@ -15,9 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     let defaults = UserDefaults.standard
     let defaultCompanyName = ["CompanyName" : "iCruit"]
+    let defaultSelectedName = ["SelectedName" : "iCruit"]
     let defaultColor = ["Color" : "Black"]
     let defaultSelectedColor = ["SelectedColor" : "Black"]
     defaults.register(defaults: defaultCompanyName)
+    defaults.register(defaults: defaultSelectedName)
     defaults.register(defaults: defaultColor)
     defaults.register(defaults: defaultSelectedColor)
     

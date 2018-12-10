@@ -18,13 +18,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let defaultSelectedName = ["SelectedName" : "iCruit"]
     let defaultColor = ["Color" : "Black"]
     let defaultSelectedColor = ["SelectedColor" : "Black"]
+    let questionArray = ["What school do you attend?", "What is your expected graduation date?", "What is your GPA?", "How did you hear about us?", "Have you applied online?","","","","","","","","","","","","","","",""]
+    let answerArray = ["","","","","","","","","","","","","","","","","","","",""]
+    let defaultQuestions = ["Questions" : questionArray]
+    let defaultAnswers = ["Answers" : answerArray]
     defaults.register(defaults: defaultCompanyName)
     defaults.register(defaults: defaultSelectedName)
     defaults.register(defaults: defaultColor)
     defaults.register(defaults: defaultSelectedColor)
-    
-    
-    
+    defaults.register(defaults: defaultQuestions)
+    defaults.register(defaults: defaultAnswers)
     return true
   }
 }

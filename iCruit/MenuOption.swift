@@ -16,7 +16,8 @@ struct MenuOption {
       MenuOption(title: leftBuffer + "Edit Color", titleString: "Color"),
       MenuOption(title: leftBuffer + "Edit Company Name", titleString: "Company"),
       MenuOption(title: leftBuffer + "View Responses", titleString: "Responses"),
-      MenuOption(title: leftBuffer + "Export Data", titleString: "Export")
+      MenuOption(title: leftBuffer + "Export Data", titleString: "Export"),
+      MenuOption(title: leftBuffer + "Tutorial", titleString: "Tutorial")
     ]
   }
   static func rightMenuOptions() -> [MenuOption] {

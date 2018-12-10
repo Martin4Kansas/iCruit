@@ -3,10 +3,18 @@ import UIKit
 struct MainMenuOption {
   let title: String
   let type: String
+  var questionNumber: Int?
+  
   init(title: String, type: String) {
     self.title = title
     self.type = type
   }
+  init(title: String, type: String, questionNumber: Int) {
+    self.title = title
+    self.type = type
+    self.questionNumber = questionNumber
+  }
+  
   static func editColorOptions() -> [MainMenuOption] {
     return [
       MainMenuOption(title: "Black", type: "ColorSelection"),
@@ -31,5 +39,18 @@ struct MainMenuOption {
       MainMenuOption(title: "", type: "CompanyTextbox"),
       MainMenuOption(title: "Submit", type: "CompanySubmission")
     ]
+  }
+  static func presentQuestionOptions() -> [MainMenuOption] {
+    var MainMenuQuestions = [MainMenuOption]()
+    let questions = UserDefaults.standard.array(forKey: "Questions")
+    var i = 0
+    for question in questions! {
+      i = i + 1
+      if ((question as! String) != "") {
+        MainMenuQuestions.append(MainMenuOption(title: question as! String, type: "Question", questionNumber: i))
+      }
+    }
+    MainMenuQuestions.append(MainMenuOption(title: "  Submit", type: "QuestionSubmission"))
+    return MainMenuQuestions
   }
 }

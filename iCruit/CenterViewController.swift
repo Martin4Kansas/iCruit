@@ -10,6 +10,7 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     static let MainMenuOptionCell = "MainMenuOptionCell"
     static let MainMenuButtonCell = "MainMenuButtonCell"
     static let MainMenuTextboxCell = "MainMenuTextboxCell"
+    static let MainMenuQuestionCell = "MainMenuQuestionCell"
   }
   override func viewDidLoad() {
       super.viewDidLoad()
@@ -77,6 +78,8 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    tableView.rowHeight = 63
+    tableView.estimatedRowHeight = 63
     if (mainViewVariables.mainMenuOptions[indexPath.row].type == "WelcomeMessage") {
       let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.MainMenuOptionCell, for: indexPath) as! MainMenuOptionCell
       cell.configureForMainMenuOption(mainViewVariables.mainMenuOptions[indexPath.row])
@@ -95,6 +98,18 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     else if (mainViewVariables.mainMenuOptions[indexPath.row].type == "CompanyTextbox") {
       let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.MainMenuTextboxCell, for: indexPath) as! MainMenuTextbox
       cell.configureForMainMenuTextbox(mainViewVariables.mainMenuOptions[indexPath.row])
+      return cell
+    }
+    else if (mainViewVariables.mainMenuOptions[indexPath.row].type == "Question") {
+      let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.MainMenuQuestionCell, for: indexPath) as! MainMenuQuestion
+      cell.configureForMainMenuQuestion(mainViewVariables.mainMenuOptions[indexPath.row])
+      tableView.rowHeight = 99
+      tableView.estimatedRowHeight = 99
+      return cell
+    }
+    else if (mainViewVariables.mainMenuOptions[indexPath.row].type == "QuestionSubmission") {
+      let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.MainMenuOptionCell, for: indexPath) as! MainMenuOptionCell
+      cell.configureForMainMenuOption(mainViewVariables.mainMenuOptions[indexPath.row])
       return cell
     }
     else {
@@ -138,7 +153,7 @@ struct mainViewVariables{
 extension CenterViewController: SidePanelViewControllerDelegate {
   func didSelectMenuOption(_ menuOption: MenuOption) {
     if (menuOption.titleString != "Present") {
-        mainViewVariables.title = menuOption.title
+      mainViewVariables.title = menuOption.title
     }
     else {
         let defaults = UserDefaults.standard
@@ -150,6 +165,9 @@ extension CenterViewController: SidePanelViewControllerDelegate {
     }
     else if (menuOption.titleString == "Company") {
       mainViewVariables.mainMenuOptions = MainMenuOption.editCompanyOptions()
+    }
+    else if (menuOption.titleString == "Present") {
+      mainViewVariables.mainMenuOptions = MainMenuOption.presentQuestionOptions()
     }
     else {
         mainViewVariables.mainMenuOptions = [MainMenuOption(title:"Welcome to iCruit", type:"WelcomeMessage")]

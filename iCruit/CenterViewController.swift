@@ -107,7 +107,22 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
       tableView.estimatedRowHeight = 99
       return cell
     }
+    else if (mainViewVariables.mainMenuOptions[indexPath.row].type == "EditQuestion") {
+      let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.MainMenuTextboxCell, for: indexPath) as! MainMenuTextbox
+      cell.configureForMainMenuTextbox(mainViewVariables.mainMenuOptions[indexPath.row])
+      return cell
+    }
     else if (mainViewVariables.mainMenuOptions[indexPath.row].type == "QuestionSubmission") {
+      let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.MainMenuOptionCell, for: indexPath) as! MainMenuOptionCell
+      cell.configureForMainMenuOption(mainViewVariables.mainMenuOptions[indexPath.row])
+      return cell
+    }
+    else if (mainViewVariables.mainMenuOptions[indexPath.row].type == "EditQuestionSubmission") {
+      let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.MainMenuOptionCell, for: indexPath) as! MainMenuOptionCell
+      cell.configureForMainMenuOption(mainViewVariables.mainMenuOptions[indexPath.row])
+      return cell
+    }
+    else if (mainViewVariables.mainMenuOptions[indexPath.row].type == "AddQuestion") {
       let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.MainMenuOptionCell, for: indexPath) as! MainMenuOptionCell
       cell.configureForMainMenuOption(mainViewVariables.mainMenuOptions[indexPath.row])
       return cell
@@ -157,7 +172,7 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
 struct mainViewVariables{
     static var title = "iCruit"
-    static var mainMenuOptions = [MainMenuOption(title:"Welcome to iCruit", type:"WelcomeMessage")]
+    static var mainMenuOptions = [MainMenuOption(title: "Welcome to iCruit", type: "WelcomeMessage")]
     static var color = UIColor.black
 }
 
@@ -179,6 +194,9 @@ extension CenterViewController: SidePanelViewControllerDelegate {
     }
     else if (menuOption.titleString == "Present") {
       mainViewVariables.mainMenuOptions = MainMenuOption.presentQuestionOptions()
+    }
+    else if (menuOption.titleString == "Questions") {
+      mainViewVariables.mainMenuOptions = MainMenuOption.editQuestionOptions()
     }
     else {
         mainViewVariables.mainMenuOptions = [MainMenuOption(title:"Welcome to iCruit", type:"WelcomeMessage")]

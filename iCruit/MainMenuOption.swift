@@ -62,4 +62,18 @@ struct MainMenuOption {
     MainMenuQuestions.append(MainMenuOption(title: "  Submit", type: "QuestionSubmission"))
     return MainMenuQuestions
   }
+  static func editQuestionOptions() -> [MainMenuOption] {
+    var MainMenuQuestions = [MainMenuOption]()
+    let questions = UserDefaults.standard.array(forKey: "Questions")
+    var i = 0
+    for question in questions! {
+      i = i + 1
+      if ((question as! String) != "") {
+        MainMenuQuestions.append(MainMenuOption(title: question as! String, type: "EditQuestion", questionNumber: i))
+      }
+    }
+    MainMenuQuestions.append(MainMenuOption(title: "  Add", type: "AddQuestion"))
+    MainMenuQuestions.append(MainMenuOption(title: "  Submit", type: "EditQuestionSubmission"))
+    return MainMenuQuestions
+  }
 }

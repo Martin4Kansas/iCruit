@@ -73,6 +73,7 @@ struct MainMenuOption {
       }
     }
     MainMenuQuestions.append(MainMenuOption(title: "  Add", type: "AddQuestion"))
+    MainMenuQuestions.append(MainMenuOption(title: "  Remove", type: "RemoveQuestion"))
     MainMenuQuestions.append(MainMenuOption(title: "  Submit", type: "EditQuestionSubmission"))
     return MainMenuQuestions
   }

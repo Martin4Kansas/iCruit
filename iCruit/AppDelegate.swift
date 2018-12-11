@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let defaultQuestions = ["Questions" : questionArray]
     let defaultAnswers = ["Answers" : answerArray]
     let defaultNumberOfAnswers = ["NumberOfAnswers" : 0]
+    let defaultNumberOfQuestions = ["NumberOfQuestions" : 5]
     let defaultSubmissionsArray = [questionArray]
     let defaultSubmissions = ["Submissions" : defaultSubmissionsArray]
     defaults.register(defaults: defaultCompanyName)
@@ -33,6 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     defaults.register(defaults: defaultAnswers)
     defaults.register(defaults: defaultNumberOfAnswers)
     defaults.register(defaults: defaultSubmissions)
+    defaults.register(defaults: defaultNumberOfQuestions)
     return true
   }
 }

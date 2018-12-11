@@ -15,6 +15,15 @@ struct MainMenuOption {
     self.questionNumber = questionNumber
   }
   
+  func getQuestionNumber() -> Int {
+    if (questionNumber != nil) {
+      return questionNumber!
+    }
+    else {
+      return 0
+    }
+  }
+  
   static func editColorOptions() -> [MainMenuOption] {
     return [
       MainMenuOption(title: "Black", type: "ColorSelection"),

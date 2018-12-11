@@ -28,9 +28,6 @@ class ContainerViewController: UIViewController {
     
     centerViewController = UIStoryboard.centerViewController()
     centerViewController.delegate = self
-    
-    // wrap the centerViewController in a navigation controller, so we can push views to it
-    // and display bar button items in the navigation bar
     centerNavigationController = UINavigationController(rootViewController: centerViewController)
     view.addSubview(centerNavigationController.view)
     addChildViewController(centerNavigationController)
@@ -40,8 +37,6 @@ class ContainerViewController: UIViewController {
     centerNavigationController.view.addGestureRecognizer(panGestureRecognizer)
   }
 }
-
-// MARK: CenterViewController delegate
 
 extension ContainerViewController: CenterViewControllerDelegate {
   
@@ -178,8 +173,6 @@ private extension UIStoryboard {
   }
 }
 
-// MARK: Gesture recognizer
-
 extension ContainerViewController: UIGestureRecognizerDelegate {
   
   @objc func handlePanGesture(_ recognizer: UIPanGestureRecognizer) {
@@ -207,8 +200,6 @@ extension ContainerViewController: UIGestureRecognizerDelegate {
     case .ended:
       if let _ = leftViewController,
         let rview = recognizer.view {
-        // animate the side panel open or closed based on whether the view
-        // has moved more or less than halfway
         let hasMovedGreaterThanHalfway = rview.center.x > view.bounds.size.width
         animateLeftPanel(shouldExpand: hasMovedGreaterThanHalfway)
         

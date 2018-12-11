@@ -19,7 +19,6 @@ class SidePanelViewController: UIViewController {
   }
 }
 
-// MARK: Table View Data Source
 extension SidePanelViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -32,8 +31,6 @@ extension SidePanelViewController: UITableViewDataSource {
     return cell
   }
 }
-
-// Mark: Table View Delegate
 
 extension SidePanelViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

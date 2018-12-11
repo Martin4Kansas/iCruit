@@ -22,12 +22,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let answerArray = ["","","","","","","","","","","","","","","","","","","",""]
     let defaultQuestions = ["Questions" : questionArray]
     let defaultAnswers = ["Answers" : answerArray]
+    let defaultNumberOfAnswers = ["NumberOfAnswers" : 0]
+    let defaultSubmissionsArray = [questionArray]
+    let defaultSubmissions = ["Submissions" : defaultSubmissionsArray]
     defaults.register(defaults: defaultCompanyName)
     defaults.register(defaults: defaultSelectedName)
     defaults.register(defaults: defaultColor)
     defaults.register(defaults: defaultSelectedColor)
     defaults.register(defaults: defaultQuestions)
     defaults.register(defaults: defaultAnswers)
+    defaults.register(defaults: defaultNumberOfAnswers)
+    defaults.register(defaults: defaultSubmissions)
     return true
   }
 }

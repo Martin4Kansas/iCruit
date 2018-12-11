@@ -140,6 +140,17 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
       self.mainMenu.reloadData()
       viewDidLoad()
     }
+    else if (mainMenuOption.type == "QuestionSubmission") {
+      let defaults = UserDefaults.standard
+      var answers = defaults.array(forKey: "Answers")
+      var submissions = defaults.array(forKey: "Submissions")
+      submissions!.append(answers!)
+      answers = ["","","","","","","","","","","","","","","","","","","",""]
+      defaults.set(submissions, forKey: "Submissions")
+      defaults.set(answers, forKey: "Answers")
+      self.mainMenu.reloadData()
+      viewDidLoad()
+    }
   }
   
 }

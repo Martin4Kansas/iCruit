@@ -1,12 +1,19 @@
 import UIKit
 
 class MainMenuQuestion: UITableViewCell {
-  
+  var questionNumber = 1
   @IBOutlet weak var questionLabel : UILabel!
   @IBOutlet weak var questionTextbox : UITextField!
-  
+  @IBAction func didChangeAnswer(_ sender: Any) {
+    let defaults = UserDefaults.standard
+    var answers = defaults.array(forKey: "Answers")
+    answers![questionNumber - 1] = questionTextbox.text!
+    defaults.set(answers, forKey:"Answers")
+  }
   func configureForMainMenuQuestion(_ mainMenuOption: MainMenuOption) {
+    questionNumber = mainMenuOption.getQuestionNumber()
     questionLabel?.text = mainMenuOption.title
+    questionTextbox?.text = ""
     questionLabel?.font = UIFont(name: "Helvetica-Bold", size: 26.0)
     questionTextbox?.font = UIFont(name: "Helvetica-Bold", size: 24.0)
     let colorString = UserDefaults.standard.string(forKey: "Color")

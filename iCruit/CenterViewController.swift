@@ -332,7 +332,7 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
   }
   func resetApp() {
     let defaults = UserDefaults.standard
-    let questionArray = ["What school do you attend?", "What is your expected graduation date?", "What is your GPA?","What is your email?", "How did you hear about us?", "Have you applied online?","","","","","","","","","","","","","",""]
+    let questionArray = ["What is your name?", "What school do you attend?", "What is your expected graduation date?", "What is your GPA?","What is your email?", "How did you hear about us?", "Have you applied online?","","","","","","","","","","","","","",""]
     let answerArray = ["","","","","","","","","","","","","","","","","","","",""]
     let defaultSubmissionsArray = [[String]]()
     defaults.set("iCruit", forKey: "CompanyName")
@@ -342,7 +342,7 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     defaults.set(questionArray, forKey: "Questions")
     defaults.set(answerArray, forKey: "Answers")
     defaults.set(0, forKey: "NumberOfAnswers")
-    defaults.set(6, forKey: "NumberOfQuestions")
+    defaults.set(7, forKey: "NumberOfQuestions")
     defaults.set(defaultSubmissionsArray, forKey: "Submissions")
     defaults.set(false, forKey:"IsLocked")
     defaults.set("", forKey:"Password")

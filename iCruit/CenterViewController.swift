@@ -11,6 +11,7 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     static let MainMenuButtonCell = "MainMenuButtonCell"
     static let MainMenuTextboxCell = "MainMenuTextboxCell"
     static let MainMenuQuestionCell = "MainMenuQuestionCell"
+    static let MainMenuSubmissionCell = "MainMenuSubmissionCell"
   }
   override func viewDidLoad() {
       super.viewDidLoad()
@@ -78,58 +79,81 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    tableView.rowHeight = 63
-    tableView.estimatedRowHeight = 63
     if (mainViewVariables.mainMenuOptions[indexPath.row].type == "WelcomeMessage") {
       let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.MainMenuOptionCell, for: indexPath) as! MainMenuOptionCell
       cell.configureForMainMenuOption(mainViewVariables.mainMenuOptions[indexPath.row])
+      tableView.rowHeight = UITableViewAutomaticDimension
+      tableView.estimatedRowHeight = 63
       return cell
     }
     else if (mainViewVariables.mainMenuOptions[indexPath.row].type == "ColorSelection") {
       let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.MainMenuOptionCell, for: indexPath) as! MainMenuOptionCell
       cell.configureForMainMenuOption(mainViewVariables.mainMenuOptions[indexPath.row])
+      tableView.rowHeight = UITableViewAutomaticDimension
+      tableView.estimatedRowHeight = 63
       return cell
     }
     else if (mainViewVariables.mainMenuOptions[indexPath.row].type == "CompanySubmission") {
       let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.MainMenuOptionCell, for: indexPath) as! MainMenuOptionCell
       cell.configureForMainMenuOption(mainViewVariables.mainMenuOptions[indexPath.row])
+      tableView.rowHeight = UITableViewAutomaticDimension
+      tableView.estimatedRowHeight = 63
       return cell
     }
     else if (mainViewVariables.mainMenuOptions[indexPath.row].type == "CompanyTextbox") {
       let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.MainMenuTextboxCell, for: indexPath) as! MainMenuTextbox
       cell.configureForMainMenuTextbox(mainViewVariables.mainMenuOptions[indexPath.row])
+      tableView.rowHeight = UITableViewAutomaticDimension
+      tableView.estimatedRowHeight = 63
       return cell
     }
     else if (mainViewVariables.mainMenuOptions[indexPath.row].type == "Question") {
       let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.MainMenuQuestionCell, for: indexPath) as! MainMenuQuestion
       cell.configureForMainMenuQuestion(mainViewVariables.mainMenuOptions[indexPath.row])
-      tableView.rowHeight = 99
-      tableView.estimatedRowHeight = 99
+      tableView.rowHeight = UITableViewAutomaticDimension
+      tableView.estimatedRowHeight = 63
       return cell
     }
     else if (mainViewVariables.mainMenuOptions[indexPath.row].type == "EditQuestion") {
       let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.MainMenuTextboxCell, for: indexPath) as! MainMenuTextbox
       cell.configureForMainMenuTextbox(mainViewVariables.mainMenuOptions[indexPath.row])
+      tableView.rowHeight = UITableViewAutomaticDimension
+      tableView.estimatedRowHeight = 63
       return cell
     }
     else if (mainViewVariables.mainMenuOptions[indexPath.row].type == "QuestionSubmission") {
       let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.MainMenuOptionCell, for: indexPath) as! MainMenuOptionCell
       cell.configureForMainMenuOption(mainViewVariables.mainMenuOptions[indexPath.row])
+      tableView.rowHeight = UITableViewAutomaticDimension
+      tableView.estimatedRowHeight = 63
       return cell
     }
     else if (mainViewVariables.mainMenuOptions[indexPath.row].type == "EditQuestionSubmission") {
       let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.MainMenuOptionCell, for: indexPath) as! MainMenuOptionCell
       cell.configureForMainMenuOption(mainViewVariables.mainMenuOptions[indexPath.row])
+      tableView.rowHeight = UITableViewAutomaticDimension
+      tableView.estimatedRowHeight = 63
       return cell
     }
     else if (mainViewVariables.mainMenuOptions[indexPath.row].type == "AddQuestion") {
       let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.MainMenuOptionCell, for: indexPath) as! MainMenuOptionCell
       cell.configureForMainMenuOption(mainViewVariables.mainMenuOptions[indexPath.row])
+      tableView.rowHeight = UITableViewAutomaticDimension
+      tableView.estimatedRowHeight = 63
+      return cell
+    }
+    else if (mainViewVariables.mainMenuOptions[indexPath.row].type == "Submission") {
+      let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.MainMenuSubmissionCell, for: indexPath) as! MainMenuSubmission
+      cell.configureForMainMenuSubmission(mainViewVariables.mainMenuOptions[indexPath.row])
+      tableView.rowHeight = UITableViewAutomaticDimension
+      tableView.estimatedRowHeight = 63
       return cell
     }
     else {
       let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.MainMenuOptionCell, for: indexPath) as! MainMenuOptionCell
       cell.configureForMainMenuOption(mainViewVariables.mainMenuOptions[indexPath.row])
+      tableView.rowHeight = UITableViewAutomaticDimension
+      tableView.estimatedRowHeight = 63
       return cell
     }
   }
@@ -219,7 +243,6 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         questions[n] = (cell.mainTextbox?.text!)!
       }
       defaults.set(questions, forKey: "Questions")
-      defaults.set(number, forKey: "NumberOfQuestions")
       mainViewVariables.mainMenuOptions = MainMenuOption.editQuestionOptions()
       self.mainMenu.reloadData()
       viewDidLoad()
@@ -255,6 +278,9 @@ extension CenterViewController: SidePanelViewControllerDelegate {
     }
     else if (menuOption.titleString == "Questions") {
       mainViewVariables.mainMenuOptions = MainMenuOption.editQuestionOptions()
+    }
+    else if (menuOption.titleString == "Responses") {
+      mainViewVariables.mainMenuOptions = MainMenuOption.submissionOptions()
     }
     else {
         mainViewVariables.mainMenuOptions = [MainMenuOption(title:"Welcome to iCruit", type:"WelcomeMessage")]

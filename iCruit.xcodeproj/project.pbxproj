@@ -23,6 +23,7 @@
 		C159288221A4CACA00A8B0CE /* MainMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C159288121A4CACA00A8B0CE /* MainMenuButton.swift */; };
 		C159288421A5DDE800A8B0CE /* MainMenuTextbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = C159288321A5DDE800A8B0CE /* MainMenuTextbox.swift */; };
 		C159288621BEFC9A00A8B0CE /* MainMenuQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = C159288521BEFC9A00A8B0CE /* MainMenuQuestion.swift */; };
+		C159288821C0BA2B00A8B0CE /* MainMenuSubmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = C159288721C0BA2B00A8B0CE /* MainMenuSubmission.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		C159288121A4CACA00A8B0CE /* MainMenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuButton.swift; sourceTree = "<group>"; };
 		C159288321A5DDE800A8B0CE /* MainMenuTextbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuTextbox.swift; sourceTree = "<group>"; };
 		C159288521BEFC9A00A8B0CE /* MainMenuQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuQuestion.swift; sourceTree = "<group>"; };
+		C159288721C0BA2B00A8B0CE /* MainMenuSubmission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuSubmission.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 				C159287F21A4917900A8B0CE /* MainMenuOptionCell.swift */,
 				C159288521BEFC9A00A8B0CE /* MainMenuQuestion.swift */,
 				C159288121A4CACA00A8B0CE /* MainMenuButton.swift */,
+				C159288721C0BA2B00A8B0CE /* MainMenuSubmission.swift */,
 				C159288321A5DDE800A8B0CE /* MainMenuTextbox.swift */,
 				17C4E01E198E477C00E0B395 /* CenterViewController.swift */,
 				5F3DBC4B1FA185120077EA89 /* CenterViewControllerDelegate.swift */,
@@ -191,6 +194,7 @@
 				17C4DFD0198E428000E0B395 /* AppDelegate.swift in Sources */,
 				17C4E01B198E444000E0B395 /* MenuOption.swift in Sources */,
 				178B5A5D198E7379006414ED /* ContainerViewController.swift in Sources */,
+				C159288821C0BA2B00A8B0CE /* MainMenuSubmission.swift in Sources */,
 				C159288621BEFC9A00A8B0CE /* MainMenuQuestion.swift in Sources */,
 				5F3DBC481FA182B60077EA89 /* SidePanelViewControllerDelegate.swift in Sources */,
 				C159288221A4CACA00A8B0CE /* MainMenuButton.swift in Sources */,

@@ -59,7 +59,7 @@ struct MainMenuOption {
         MainMenuQuestions.append(MainMenuOption(title: question as! String, type: "Question", questionNumber: i))
       }
     }
-    MainMenuQuestions.append(MainMenuOption(title: "  Submit", type: "QuestionSubmission"))
+    MainMenuQuestions.append(MainMenuOption(title: "Submit", type: "QuestionSubmission"))
     return MainMenuQuestions
   }
   static func editQuestionOptions() -> [MainMenuOption] {
@@ -72,9 +72,31 @@ struct MainMenuOption {
         MainMenuQuestions.append(MainMenuOption(title: question as! String, type: "EditQuestion", questionNumber: i))
       }
     }
-    MainMenuQuestions.append(MainMenuOption(title: "  Add", type: "AddQuestion"))
-    MainMenuQuestions.append(MainMenuOption(title: "  Remove", type: "RemoveQuestion"))
-    MainMenuQuestions.append(MainMenuOption(title: "  Submit", type: "EditQuestionSubmission"))
+    MainMenuQuestions.append(MainMenuOption(title: "Add", type: "AddQuestion"))
+    MainMenuQuestions.append(MainMenuOption(title: "Remove", type: "RemoveQuestion"))
+    MainMenuQuestions.append(MainMenuOption(title: "Submit", type: "EditQuestionSubmission"))
     return MainMenuQuestions
+  }
+  static func submissionOptions() -> [MainMenuOption] {
+    var MainMenuSubmissions = [MainMenuOption]()
+    let submissions = UserDefaults.standard.array(forKey: "Submissions")
+    for sub in submissions! {
+      let submission = sub as! [String]
+      var subString = ""
+      var isFirst = true
+      for answer in submission {
+        if (answer != "") {
+          if (!isFirst) {
+            subString = subString + ", "
+          }
+          else {
+            isFirst = false
+          }
+          subString = subString + answer
+        }
+      }
+      MainMenuSubmissions.append(MainMenuOption (title: subString, type: "Submission"))
+    }
+    return MainMenuSubmissions
   }
 }

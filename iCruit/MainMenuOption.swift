@@ -112,8 +112,14 @@ struct MainMenuOption {
           subString = subString + answer
         }
       }
-      MainMenuSubmissions.append(MainMenuOption (title: subString, type: "Submission"))
+      MainMenuSubmissions.append(MainMenuOption(title: subString, type: "Submission"))
     }
     return MainMenuSubmissions
+  }
+  static func resetOptions() -> [MainMenuOption] {
+    return [MainMenuOption(title: "Reset", type: "Reset")]
+  }
+  static func areYouSureOptions() -> [MainMenuOption] {
+    return [MainMenuOption(title: "Are you sure?", type: "Sure"),MainMenuOption(title: "Yes, reset.", type: "YesReset"), MainMenuOption(title: "No, don't reset.", type: "NoReset")]
   }
 }

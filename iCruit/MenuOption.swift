@@ -22,8 +22,8 @@ struct MenuOption {
   }
   static func rightMenuOptions() -> [MenuOption] {
     return [
-      MenuOption(title: rightBuffer + "Lock/Unlock", titleString: "Lock"),
-      MenuOption(title: rightBuffer + "Present", titleString: "Present")
+      MenuOption(title: rightBuffer + "Present", titleString: "Present"),
+      MenuOption(title: rightBuffer + "Lock/Unlock", titleString: "Lock")
     ]
   }
 }

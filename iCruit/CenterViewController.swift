@@ -163,6 +163,13 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
       tableView.estimatedRowHeight = 63
       return cell
     }
+    else if (mainViewVariables.mainMenuOptions[indexPath.row].type == "Reset") {
+      let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.MainMenuOptionCell, for: indexPath) as! MainMenuOptionCell
+      cell.configureForMainMenuOption(mainViewVariables.mainMenuOptions[indexPath.row])
+      tableView.rowHeight = UITableViewAutomaticDimension
+      tableView.estimatedRowHeight = 63
+      return cell
+    }
     else {
       let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.MainMenuOptionCell, for: indexPath) as! MainMenuOptionCell
       cell.configureForMainMenuOption(mainViewVariables.mainMenuOptions[indexPath.row])
@@ -306,6 +313,22 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         resetApp()
       }
     }
+    else if (mainMenuOption.type == "Reset") {
+      mainViewVariables.mainMenuOptions = MainMenuOption.areYouSureOptions()
+      self.mainMenu.reloadData()
+      viewDidLoad()
+    }
+    else if (mainMenuOption.type == "YesReset") {
+      resetApp()
+      mainViewVariables.mainMenuOptions = [MainMenuOption(title: "iCruit was successfully reset.", type: "Success")]
+      self.mainMenu.reloadData()
+      viewDidLoad()
+    }
+    else if (mainMenuOption.type == "NoReset") {
+      mainViewVariables.mainMenuOptions = MainMenuOption.resetOptions()
+      self.mainMenu.reloadData()
+      viewDidLoad()
+    }
   }
   func resetApp() {
     let defaults = UserDefaults.standard
@@ -361,6 +384,9 @@ extension CenterViewController: SidePanelViewControllerDelegate {
     else if (menuOption.titleString == "Lock") {
       mainViewVariables.mainMenuOptions = MainMenuOption.lockOptions()
       mainViewVariables.title = "Lock/Unlock"
+    }
+    else if (menuOption.titleString == "Reset") {
+      mainViewVariables.mainMenuOptions = MainMenuOption.resetOptions()
     }
     else {
       mainViewVariables.mainMenuOptions = [MainMenuOption(title:"Welcome to iCruit", type:"WelcomeMessage")]

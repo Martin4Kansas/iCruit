@@ -149,6 +149,20 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
       tableView.estimatedRowHeight = 63
       return cell
     }
+    else if (mainViewVariables.mainMenuOptions[indexPath.row].type == "PasswordTextbox") {
+      let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.MainMenuTextboxCell, for: indexPath) as! MainMenuTextbox
+      cell.configureForMainMenuTextbox(mainViewVariables.mainMenuOptions[indexPath.row])
+      tableView.rowHeight = UITableViewAutomaticDimension
+      tableView.estimatedRowHeight = 63
+      return cell
+    }
+    else if (mainViewVariables.mainMenuOptions[indexPath.row].type == "PasswordSubmission") {
+      let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.MainMenuOptionCell, for: indexPath) as! MainMenuOptionCell
+      cell.configureForMainMenuOption(mainViewVariables.mainMenuOptions[indexPath.row])
+      tableView.rowHeight = UITableViewAutomaticDimension
+      tableView.estimatedRowHeight = 63
+      return cell
+    }
     else {
       let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.MainMenuOptionCell, for: indexPath) as! MainMenuOptionCell
       cell.configureForMainMenuOption(mainViewVariables.mainMenuOptions[indexPath.row])
@@ -247,8 +261,70 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
       self.mainMenu.reloadData()
       viewDidLoad()
     }
+    else if (mainMenuOption.type == "PasswordSubmission") {
+      let defaults = UserDefaults.standard
+      let oldPassword = defaults.string(forKey: "Password")
+      let newPassword = (tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! MainMenuTextbox).mainTextbox?.text!
+      let isLocked = defaults.bool(forKey: "IsLocked")
+      var numberWrong = defaults.integer(forKey: "WrongPasswords")
+      if (!isLocked) {
+        defaults.set(true, forKey: "IsLocked")
+        defaults.set(newPassword as! String, forKey: "Password")
+        (tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as! MainMenuOptionCell).mainMenuOptionLabel.text = "Unlock"
+      }
+      else if (oldPassword == newPassword) {
+        defaults.set(false, forKey: "IsLocked")
+        defaults.set("", forKey: "Password")
+        numberWrong = 0
+        defaults.set(numberWrong, forKey: "WrongPasswords")
+        (tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as! MainMenuOptionCell).mainMenuOptionLabel.text = "Lock"
+      }
+      else if (numberWrong < 8) {
+        numberWrong = numberWrong + 1
+        (tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! MainMenuTextbox).mainTextbox?.text! = "Wrong Password x" + String(numberWrong)
+        defaults.set(numberWrong, forKey: "WrongPasswords")
+      }
+      else if (numberWrong < 9) {
+        numberWrong = numberWrong + 1
+        (tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! MainMenuTextbox).mainTextbox?.text! = "Two more wrong passwords until reset."
+        defaults.set(numberWrong, forKey: "WrongPasswords")
+      }
+      else if (numberWrong < 10) {
+        numberWrong = numberWrong + 1
+        (tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! MainMenuTextbox).mainTextbox?.text! = "One more wrong passwords until reset."
+        defaults.set(numberWrong, forKey: "WrongPasswords")
+      }
+      else if (numberWrong < 11) {
+        numberWrong = numberWrong + 1
+        (tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! MainMenuTextbox).mainTextbox?.text! = "Too many wrong passwords, press reset to reset iCruit!"
+        (tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as! MainMenuOptionCell).mainMenuOptionLabel.text = "Reset"
+        defaults.set(numberWrong, forKey: "WrongPasswords")
+      }
+      else {
+        (tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! MainMenuTextbox).mainTextbox?.text! = "iCruit was reset!"
+        (tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as! MainMenuOptionCell).mainMenuOptionLabel.text = "Lock"
+        resetApp()
+      }
+    }
   }
-  
+  func resetApp() {
+    let defaults = UserDefaults.standard
+    let questionArray = ["What school do you attend?", "What is your expected graduation date?", "What is your GPA?","What is your email?", "How did you hear about us?", "Have you applied online?","","","","","","","","","","","","","",""]
+    let answerArray = ["","","","","","","","","","","","","","","","","","","",""]
+    let defaultSubmissionsArray = [[String]]()
+    defaults.set("iCruit", forKey: "CompanyName")
+    defaults.set("iCruit", forKey: "SelectedName")
+    defaults.set("Black", forKey: "Color")
+    defaults.set("Black", forKey: "SelectedColor")
+    defaults.set(questionArray, forKey: "Questions")
+    defaults.set(answerArray, forKey: "Answers")
+    defaults.set(0, forKey: "NumberOfAnswers")
+    defaults.set(6, forKey: "NumberOfQuestions")
+    defaults.set(defaultSubmissionsArray, forKey: "Submissions")
+    defaults.set(false, forKey:"IsLocked")
+    defaults.set("", forKey:"Password")
+    defaults.set(0, forKey:"WrongPasswords")
+  }
 }
 
 struct mainViewVariables{
@@ -282,8 +358,12 @@ extension CenterViewController: SidePanelViewControllerDelegate {
     else if (menuOption.titleString == "Responses") {
       mainViewVariables.mainMenuOptions = MainMenuOption.submissionOptions()
     }
+    else if (menuOption.titleString == "Lock") {
+      mainViewVariables.mainMenuOptions = MainMenuOption.lockOptions()
+      mainViewVariables.title = "Lock/Unlock"
+    }
     else {
-        mainViewVariables.mainMenuOptions = [MainMenuOption(title:"Welcome to iCruit", type:"WelcomeMessage")]
+      mainViewVariables.mainMenuOptions = [MainMenuOption(title:"Welcome to iCruit", type:"WelcomeMessage")]
     }
     delegate?.collapseSidePanels?()
     self.mainMenu.reloadData()

@@ -41,13 +41,17 @@ class ContainerViewController: UIViewController {
 extension ContainerViewController: CenterViewControllerDelegate {
   
   func toggleLeftPanel() {
-    let notAlreadyExpanded = (currentState != .leftPanelExpanded)
-    
-    if notAlreadyExpanded {
-      addLeftPanelViewController()
+    let defaults = UserDefaults.standard
+    let isLocked = defaults.bool(forKey: "IsLocked")
+    if (!isLocked) {
+      let notAlreadyExpanded = (currentState != .leftPanelExpanded)
+      
+      if notAlreadyExpanded {
+        addLeftPanelViewController()
+      }
+      
+      animateLeftPanel(shouldExpand: notAlreadyExpanded)
     }
-    
-    animateLeftPanel(shouldExpand: notAlreadyExpanded)
   }
   
   func toggleRightPanel() {
@@ -103,16 +107,20 @@ extension ContainerViewController: CenterViewControllerDelegate {
 
   
   func animateLeftPanel(shouldExpand: Bool) {
-    if shouldExpand {
-      currentState = .leftPanelExpanded
-      animateCenterPanelXPosition(
-        targetPosition: centerNavigationController.view.frame.width - centerPanelExpandedOffset)
-      
-    } else {
-      animateCenterPanelXPosition(targetPosition: 0) { finished in
-        self.currentState = .bothCollapsed
-        self.leftViewController?.view.removeFromSuperview()
-        self.leftViewController = nil
+    let defaults = UserDefaults.standard
+    let isLocked = defaults.bool(forKey: "IsLocked")
+    if (!isLocked) {
+      if shouldExpand {
+        currentState = .leftPanelExpanded
+        animateCenterPanelXPosition(
+          targetPosition: centerNavigationController.view.frame.width - centerPanelExpandedOffset)
+        
+      } else {
+        animateCenterPanelXPosition(targetPosition: 0) { finished in
+          self.currentState = .bothCollapsed
+          self.leftViewController?.view.removeFromSuperview()
+          self.leftViewController = nil
+        }
       }
     }
   }
@@ -183,7 +191,12 @@ extension ContainerViewController: UIGestureRecognizerDelegate {
     case .began:
       if currentState == .bothCollapsed {
         if gestureIsDraggingFromLeftToRight {
-          addLeftPanelViewController()
+          
+          let defaults = UserDefaults.standard
+          let isLocked = defaults.bool(forKey: "IsLocked")
+          if (!isLocked) {
+            addLeftPanelViewController()
+          }
         } else {
           addRightPanelViewController()
         }

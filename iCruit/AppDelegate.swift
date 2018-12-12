@@ -18,14 +18,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let defaultSelectedName = ["SelectedName" : "iCruit"]
     let defaultColor = ["Color" : "Black"]
     let defaultSelectedColor = ["SelectedColor" : "Black"]
-    let questionArray = ["What school do you attend?", "What is your expected graduation date?", "What is your GPA?", "How did you hear about us?", "Have you applied online?","","","","","","","","","","","","","","",""]
+    let questionArray = ["What school do you attend?", "What is your expected graduation date?", "What is your GPA?","What is your email?", "How did you hear about us?", "Have you applied online?","","","","","","","","","","","","","",""]
     let answerArray = ["","","","","","","","","","","","","","","","","","","",""]
     let defaultQuestions = ["Questions" : questionArray]
     let defaultAnswers = ["Answers" : answerArray]
     let defaultNumberOfAnswers = ["NumberOfAnswers" : 0]
-    let defaultNumberOfQuestions = ["NumberOfQuestions" : 5]
+    let defaultNumberOfQuestions = ["NumberOfQuestions" : 6]
     let defaultSubmissionsArray = [[String]]()
     let defaultSubmissions = ["Submissions" : defaultSubmissionsArray]
+    let defaultLockStatus = ["IsLocked" : false]
+    let defaultPassword = ["Password" : ""]
+    let defaultWrongPasswords = ["WrongPasswords" : 0]
     defaults.register(defaults: defaultCompanyName)
     defaults.register(defaults: defaultSelectedName)
     defaults.register(defaults: defaultColor)
@@ -35,6 +38,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     defaults.register(defaults: defaultNumberOfAnswers)
     defaults.register(defaults: defaultSubmissions)
     defaults.register(defaults: defaultNumberOfQuestions)
+    defaults.register(defaults: defaultLockStatus)
+    defaults.register(defaults: defaultPassword)
+    defaults.register(defaults: defaultWrongPasswords)
     return true
   }
 }

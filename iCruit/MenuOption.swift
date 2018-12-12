@@ -11,19 +11,19 @@ struct MenuOption {
   }
   static func leftMenuOptions() -> [MenuOption] {
     return [
-      MenuOption(title: leftBuffer + "Present", titleString: "Present"),
       MenuOption(title: leftBuffer + "Edit Questions", titleString: "Questions"),
       MenuOption(title: leftBuffer + "Edit Color", titleString: "Color"),
       MenuOption(title: leftBuffer + "Edit Company Name", titleString: "Company"),
       MenuOption(title: leftBuffer + "View Responses", titleString: "Responses"),
       MenuOption(title: leftBuffer + "Export Data", titleString: "Export"),
+      MenuOption(title: leftBuffer + "Reset App", titleString: "Reset"),
       MenuOption(title: leftBuffer + "Tutorial", titleString: "Tutorial")
     ]
   }
   static func rightMenuOptions() -> [MenuOption] {
     return [
       MenuOption(title: rightBuffer + "Lock/Unlock", titleString: "Lock"),
-      MenuOption(title: rightBuffer + "Reset App", titleString: "Reset")
+      MenuOption(title: rightBuffer + "Present", titleString: "Present")
     ]
   }
 }

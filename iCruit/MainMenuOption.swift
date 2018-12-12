@@ -49,6 +49,23 @@ struct MainMenuOption {
       MainMenuOption(title: "Submit", type: "CompanySubmission")
     ]
   }
+  static func lockOptions() -> [MainMenuOption] {
+    let isLocked = UserDefaults.standard.bool(forKey: "IsLocked")
+    if (isLocked) {
+      return [
+        MainMenuOption(title: "Password:", type: "Label"),
+        MainMenuOption(title: "", type: "PasswordTextbox"),
+        MainMenuOption(title: "Unlock", type: "PasswordSubmission")
+      ]
+    }
+    else {
+      return [
+        MainMenuOption(title: "Password:", type: "Label"),
+        MainMenuOption(title: "", type: "PasswordTextbox"),
+        MainMenuOption(title: "Lock", type: "PasswordSubmission")
+      ]
+    }
+  }
   static func presentQuestionOptions() -> [MainMenuOption] {
     var MainMenuQuestions = [MainMenuOption]()
     let questions = UserDefaults.standard.array(forKey: "Questions")

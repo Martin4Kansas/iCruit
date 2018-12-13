@@ -452,20 +452,13 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
 struct mainViewVariables{
     static var title = "iCruit"
-    static var mainMenuOptions = [MainMenuOption(title: "Welcome to iCruit", type: "WelcomeMessage")]
+    static var mainMenuOptions = [MainMenuOption(title:"Welcome to iCruit", type:"Tutorial"),MainMenuOption(title:"iCruit allows you to create a custom experience for potential applicants to give you information about themselves.", type:"Tutorial"),MainMenuOption(title:"Take a look in the Admin menu to change the questions, color of questions and titles, edit your company's name, view responses, export data via email, and finally reset the app!", type:"Tutorial"),MainMenuOption(title:"iCruit doesn't require a Wi-Fi connection to gather data, but you will need to be connected to export data.", type:"Tutorial"),MainMenuOption(title:"In the Lock/Unlock menu, you'll find an option to present the questions to applicants as well as lock/unlock the admin menu with a password", type:"Tutorial"),MainMenuOption(title:"Don't forget your password as you will not be able to access the data without it.", type:"Tutorial"),MainMenuOption(title:"If you do forget the password, you can reset the app by repeatedly submitting an incorrect password.", type:"Tutorial"),MainMenuOption(title:"I hope you enjoy the app, and if you have any questions, concerns or comments, email me at jordanmartin@ksu.edu.", type:"Tutorial")]
     static var color = UIColor.black
 }
 
 extension CenterViewController: SidePanelViewControllerDelegate {
   func didSelectMenuOption(_ menuOption: MenuOption) {
-    if (menuOption.titleString != "Present") {
-      mainViewVariables.title = menuOption.title
-    }
-    else {
-        let defaults = UserDefaults.standard
-        let token = defaults.string(forKey: "CompanyName")
-        mainViewVariables.title = String(token!)
-    }
+    mainViewVariables.title = menuOption.title
     if (menuOption.titleString == "Color") {
         mainViewVariables.mainMenuOptions = MainMenuOption.editColorOptions()
     }
@@ -474,6 +467,9 @@ extension CenterViewController: SidePanelViewControllerDelegate {
     }
     else if (menuOption.titleString == "Present") {
       mainViewVariables.mainMenuOptions = MainMenuOption.presentQuestionOptions()
+      let defaults = UserDefaults.standard
+      let token = defaults.string(forKey: "CompanyName")
+      mainViewVariables.title = String(token!)
     }
     else if (menuOption.titleString == "Questions") {
       mainViewVariables.mainMenuOptions = MainMenuOption.editQuestionOptions()
@@ -491,8 +487,9 @@ extension CenterViewController: SidePanelViewControllerDelegate {
     else if (menuOption.titleString == "Export") {
       mainViewVariables.mainMenuOptions = MainMenuOption.exportOptions()
     }
-    else {
-      mainViewVariables.mainMenuOptions = [MainMenuOption(title:"Welcome to iCruit", type:"WelcomeMessage")]
+    else if (menuOption.titleString == "Tutorial") {
+      mainViewVariables.mainMenuOptions = [MainMenuOption(title:"Welcome to iCruit", type:"Tutorial"),MainMenuOption(title:"iCruit allows you to create a custom experience for potential applicants to give you information about themselves.", type:"Tutorial"),MainMenuOption(title:"Take a look in the Admin menu to change the questions, color of questions and titles, edit your company's name, view responses, export data via email, and finally reset the app!", type:"Tutorial"),MainMenuOption(title:"iCruit doesn't require a Wi-Fi connection to gather data, but you will need to be connected to export data.", type:"Tutorial"),MainMenuOption(title:"In the Lock/Unlock menu, you'll find an option to present the questions to applicants as well as lock/unlock the admin menu with a password", type:"Tutorial"),MainMenuOption(title:"Don't forget your password as you will not be able to access the data without it.", type:"Tutorial"),MainMenuOption(title:"If you do forget the password, you can reset the app by repeatedly submitting an incorrect password.", type:"Tutorial"),MainMenuOption(title:"I hope you enjoy the app, and if you have any questions, concerns or comments, email me at jordanmartin@ksu.edu.", type:"Tutorial")]
+      mainViewVariables.title = "iCruit"
     }
     delegate?.collapseSidePanels?()
     self.mainMenu.reloadData()

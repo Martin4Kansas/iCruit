@@ -178,6 +178,20 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
       tableView.estimatedRowHeight = 63
       return cell
     }
+    else if (mainViewVariables.mainMenuOptions[indexPath.row].type == "ResetSubmission") {
+      let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.MainMenuOptionCell, for: indexPath) as! MainMenuOptionCell
+      cell.configureForMainMenuOption(mainViewVariables.mainMenuOptions[indexPath.row])
+      tableView.rowHeight = UITableViewAutomaticDimension
+      tableView.estimatedRowHeight = 63
+      return cell
+    }
+    else if (mainViewVariables.mainMenuOptions[indexPath.row].type == "Generic") {
+      let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.MainMenuOptionCell, for: indexPath) as! MainMenuOptionCell
+      cell.configureForMainMenuOption(mainViewVariables.mainMenuOptions[indexPath.row])
+      tableView.rowHeight = UITableViewAutomaticDimension
+      tableView.estimatedRowHeight = 63
+      return cell
+    }
     else {
       let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.MainMenuOptionCell, for: indexPath) as! MainMenuOptionCell
       cell.configureForMainMenuOption(mainViewVariables.mainMenuOptions[indexPath.row])
@@ -348,6 +362,17 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         viewDidLoad()
       }
     }
+    else if (mainMenuOption.type == "ResetSubmission") {
+      let defaults = UserDefaults.standard
+      let answerArray = ["","","","","","","","","","","","","","","","","","","",""]
+      let defaultSubmissionsArray = [[String]]()
+      defaults.set(answerArray, forKey: "Answers")
+      defaults.set(0, forKey: "NumberOfAnswers")
+      defaults.set(defaultSubmissionsArray, forKey: "Submissions")
+      mainViewVariables.mainMenuOptions = [MainMenuOption(title: "Responses were reset!", type: "Generic")]
+      self.mainMenu.reloadData()
+      viewDidLoad()
+    }
   }
   func resetApp() {
     let defaults = UserDefaults.standard
@@ -419,6 +444,9 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
   
   func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
     controller.dismiss(animated: true)
+    mainViewVariables.mainMenuOptions = [MainMenuOption(title: "Reset Response Data", type: "ResetSubmission")]
+    self.mainMenu.reloadData()
+    viewDidLoad()
   }
 }
 

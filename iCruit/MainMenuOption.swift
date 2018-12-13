@@ -77,6 +77,9 @@ struct MainMenuOption {
       }
     }
     MainMenuQuestions.append(MainMenuOption(title: "Submit", type: "QuestionSubmission"))
+    for _ in 1...20 {
+      MainMenuQuestions.append(MainMenuOption(title: "", type: "Dummy"))
+    }
     return MainMenuQuestions
   }
   static func editQuestionOptions() -> [MainMenuOption] {
@@ -92,6 +95,9 @@ struct MainMenuOption {
     MainMenuQuestions.append(MainMenuOption(title: "Add", type: "AddQuestion"))
     MainMenuQuestions.append(MainMenuOption(title: "Remove", type: "RemoveQuestion"))
     MainMenuQuestions.append(MainMenuOption(title: "Submit", type: "EditQuestionSubmission"))
+    for _ in 1...20 {
+      MainMenuQuestions.append(MainMenuOption(title: "", type: "Dummy"))
+    }
     return MainMenuQuestions
   }
   static func submissionOptions() -> [MainMenuOption] {

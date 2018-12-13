@@ -122,4 +122,7 @@ struct MainMenuOption {
   static func areYouSureOptions() -> [MainMenuOption] {
     return [MainMenuOption(title: "Are you sure?", type: "Sure"),MainMenuOption(title: "Yes, reset.", type: "YesReset"), MainMenuOption(title: "No, don't reset.", type: "NoReset")]
   }
+  static func exportOptions() -> [MainMenuOption] {
+    return [MainMenuOption(title: "Export Data", type: "Export")]
+  }
 }

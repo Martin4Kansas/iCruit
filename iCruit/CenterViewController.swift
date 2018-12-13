@@ -1,6 +1,7 @@
 import UIKit
+import MessageUI
 
-class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate {
   @IBOutlet weak var editButton: UIBarButtonItem!
   @IBOutlet weak var adminButton: UIBarButtonItem!
   @IBOutlet weak var topBar: UINavigationItem!
@@ -170,6 +171,13 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
       tableView.estimatedRowHeight = 63
       return cell
     }
+    else if (mainViewVariables.mainMenuOptions[indexPath.row].type == "Export") {
+      let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.MainMenuOptionCell, for: indexPath) as! MainMenuOptionCell
+      cell.configureForMainMenuOption(mainViewVariables.mainMenuOptions[indexPath.row])
+      tableView.rowHeight = UITableViewAutomaticDimension
+      tableView.estimatedRowHeight = 63
+      return cell
+    }
     else {
       let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.MainMenuOptionCell, for: indexPath) as! MainMenuOptionCell
       cell.configureForMainMenuOption(mainViewVariables.mainMenuOptions[indexPath.row])
@@ -329,6 +337,17 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
       self.mainMenu.reloadData()
       viewDidLoad()
     }
+    else if (mainMenuOption.type == "Export") {
+      if MFMailComposeViewController.canSendMail() {
+        let mailVC = configuredMailComposeViewController()
+        self.present(mailVC, animated: true, completion: nil)
+      }
+      else {
+        mainViewVariables.mainMenuOptions = [MainMenuOption(title: "Your mail client is not set up properly.  Please set up and try again later.", type: "Export")]
+        self.mainMenu.reloadData()
+        viewDidLoad()
+      }
+    }
   }
   func resetApp() {
     let defaults = UserDefaults.standard
@@ -347,6 +366,59 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     defaults.set(false, forKey:"IsLocked")
     defaults.set("", forKey:"Password")
     defaults.set(0, forKey:"WrongPasswords")
+  }
+  
+  func configuredMailComposeViewController() -> MFMailComposeViewController {
+    let mailComposerVC = MFMailComposeViewController()
+    mailComposerVC.mailComposeDelegate = self
+    mailComposerVC.setSubject("Potential Applicant Data")
+    mailComposerVC.setMessageBody("Attached to this email is a CSV of potential applicant data.", isHTML: false)
+    let csvStringData = generateStringForCSV()
+    if let data = (csvStringData as NSString).data(using: String.Encoding.utf8.rawValue){
+      //Attach File
+      mailComposerVC.addAttachmentData(data, mimeType: "text/plain", fileName: "applicants.csv")
+    }
+    return mailComposerVC
+  }
+  
+  func generateStringForCSV () -> NSMutableString {
+    let delimiter = ","
+    let stringData:NSMutableString  = NSMutableString()
+    let defaults = UserDefaults.standard
+    let submissions = defaults.array(forKey: "Submissions") as! [[String]]
+    let questions = defaults.array(forKey: "Questions") as! [String]
+    var isFirst = true
+    
+    for question in questions {
+      if (!isFirst) {
+        stringData.append(delimiter)
+      }
+      else {
+        isFirst = false
+      }
+      stringData.append(question)
+    }
+    stringData.append("\n")
+    
+    for submission in submissions {
+      isFirst = true
+      for entry in submission {
+        if (!isFirst) {
+          stringData.append(delimiter)
+        }
+        else {
+          isFirst = false
+        }
+        stringData.append(entry)
+      }
+      stringData.append("\n")
+    }
+    
+    return stringData
+  }
+  
+  func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+    controller.dismiss(animated: true)
   }
 }
 
@@ -387,6 +459,9 @@ extension CenterViewController: SidePanelViewControllerDelegate {
     }
     else if (menuOption.titleString == "Reset") {
       mainViewVariables.mainMenuOptions = MainMenuOption.resetOptions()
+    }
+    else if (menuOption.titleString == "Export") {
+      mainViewVariables.mainMenuOptions = MainMenuOption.exportOptions()
     }
     else {
       mainViewVariables.mainMenuOptions = [MainMenuOption(title:"Welcome to iCruit", type:"WelcomeMessage")]

@@ -7,6 +7,8 @@ class MainMenuOptionCell: UITableViewCell {
   func configureForMainMenuOption(_ mainMenuOption: MainMenuOption) {
     mainMenuOptionLabel.text = mainMenuOption.title
     mainMenuOptionLabel.font = UIFont(name: "Helvetica-Bold", size: 26.0)
+    mainMenuOptionLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
+    mainMenuOptionLabel.numberOfLines = 0
     if (mainMenuOption.type == "ColorSelection") {
       switch mainMenuOption.title {
       case "Black":

@@ -236,6 +236,7 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     else if (mainMenuOption.type == "AddQuestion") {
       let defaults = UserDefaults.standard
       var questions = defaults.array(forKey: "Questions") as? [String]
+      var selectedQuestions = defaults.array(forKey: "SelectedQuestions") as? [String]
       var number = defaults.integer(forKey: "NumberOfQuestions")
       var notFound = true
       if (number != 20) {
@@ -247,8 +248,18 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         number = number + 1
       }
+      notFound = true
+      if (number != 19) {
+        for n in 0...19 {
+          if (notFound && selectedQuestions![n]=="") {
+            selectedQuestions![n] = "Question " + String(n+1)
+            notFound = false
+          }
+        }
+      }
       defaults.set(questions, forKey: "Questions")
       defaults.set(number, forKey: "NumberOfQuestions")
+      defaults.set(selectedQuestions, forKey: "SelectedQuestions")
       mainViewVariables.mainMenuOptions = MainMenuOption.editQuestionOptions()
       self.mainMenu.reloadData()
       viewDidLoad()
@@ -271,6 +282,7 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         number = number - 1
       }
       defaults.set(questions, forKey: "Questions")
+      defaults.set(questions, forKey: "SelectedQuestions")
       defaults.set(number, forKey: "NumberOfQuestions")
       mainViewVariables.mainMenuOptions = MainMenuOption.editQuestionOptions()
       self.mainMenu.reloadData()
@@ -278,13 +290,14 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     else if (mainMenuOption.type == "EditQuestionSubmission") {
       let defaults = UserDefaults.standard
-      var questions = ["","","","","","","","","","","","","","","","","","","",""]
-      let number = defaults.integer(forKey: "NumberOfQuestions")
-      for n in 0...(number - 1) {
-        let path = IndexPath(row: n, section: 0)
-        let cell = tableView.cellForRow(at: path) as! MainMenuTextbox
-        questions[n] = (cell.mainTextbox?.text!)!
-      }
+      let questions = defaults.array(forKey: "SelectedQuestions")
+      //var i = 0
+      //for cell in tableView.visibleCells {
+      //  if (cell.isKind(of: MainMenuTextbox.self)) {
+      //    questions[i] = ((cell as! MainMenuTextbox).mainTextbox?.text!)!
+      //  }
+      //  i = i + 1
+      //}
       defaults.set(questions, forKey: "Questions")
       mainViewVariables.mainMenuOptions = MainMenuOption.editQuestionOptions()
       self.mainMenu.reloadData()

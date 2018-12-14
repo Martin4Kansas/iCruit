@@ -29,6 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let defaultLockStatus = ["IsLocked" : false]
     let defaultPassword = ["Password" : ""]
     let defaultWrongPasswords = ["WrongPasswords" : 0]
+    let defaultSelectedQuestionsArray = ["What is your name?", "What school do you attend?", "What is your expected graduation date?", "What is your GPA?","What is your email?", "How did you hear about us?", "Have you applied online?","","","","","","","","","","","","","",""]
+    let defaultSelectedQuestions = ["SelectedQuestions" : defaultSelectedQuestionsArray]
     defaults.register(defaults: defaultCompanyName)
     defaults.register(defaults: defaultSelectedName)
     defaults.register(defaults: defaultColor)
@@ -41,6 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     defaults.register(defaults: defaultLockStatus)
     defaults.register(defaults: defaultPassword)
     defaults.register(defaults: defaultWrongPasswords)
+    defaults.register(defaults: defaultSelectedQuestions)
     return true
   }
 }

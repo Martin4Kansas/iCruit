@@ -243,19 +243,11 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         for n in 0...19 {
           if (notFound && questions![n]=="") {
             questions![n] = "Question " + String(n+1)
-            notFound = false
-          }
-        }
-        number = number + 1
-      }
-      notFound = true
-      if (number != 19) {
-        for n in 0...19 {
-          if (notFound && selectedQuestions![n]=="") {
             selectedQuestions![n] = "Question " + String(n+1)
             notFound = false
           }
         }
+        number = number + 1
       }
       defaults.set(questions, forKey: "Questions")
       defaults.set(number, forKey: "NumberOfQuestions")
@@ -267,16 +259,19 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     else if (mainMenuOption.type == "RemoveQuestion") {
       let defaults = UserDefaults.standard
       var questions = defaults.array(forKey: "Questions") as? [String]
+      var selectedQuestions = defaults.array(forKey: "SelectedQuestions") as? [String]
       var number = defaults.integer(forKey: "NumberOfQuestions")
       var notFound = true
       if (number != 1) {
         for n in 1...19 {
           if (notFound && questions![n]=="") {
             questions![n - 1] = ""
+            selectedQuestions![n-1] = ""
             notFound = false
           }
           else if (n==19) {
             questions![n] = ""
+            selectedQuestions![n] = ""
           }
         }
         number = number - 1

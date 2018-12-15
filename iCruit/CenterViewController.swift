@@ -16,45 +16,75 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
   }
   override func viewDidLoad() {
       super.viewDidLoad()
+      mainMenu.separatorStyle = .none
       mainViewVariables.color = UIColor.black
       let colorString = UserDefaults.standard.string(forKey: "Color")
+      self.navigationController?.navigationBar.barTintColor = UIColor.black
       switch colorString {
         case "Black":
           mainViewVariables.color = UIColor.black
+          mainViewVariables.background = UIColor.white
+          self.navigationController?.navigationBar.barTintColor = UIColor.white
         case "Blue":
           mainViewVariables.color = UIColor.blue
+          mainViewVariables.background = UIColor.white
+          self.navigationController?.navigationBar.barTintColor = UIColor.white
         case "Brown":
           mainViewVariables.color = UIColor.brown
+          mainViewVariables.background = UIColor.white
+          self.navigationController?.navigationBar.barTintColor = UIColor.white
         case "Cyan":
           mainViewVariables.color = UIColor.cyan
+          mainViewVariables.background = UIColor.black
+          self.navigationController?.navigationBar.barTintColor = UIColor.black
         case "Dark Gray":
           mainViewVariables.color = UIColor.darkGray
+          mainViewVariables.background = UIColor.white
+          self.navigationController?.navigationBar.barTintColor = UIColor.white
         case "Gray":
           mainViewVariables.color = UIColor.gray
+          mainViewVariables.background = UIColor.white
+          self.navigationController?.navigationBar.barTintColor = UIColor.black
         case "Green":
           mainViewVariables.color = UIColor.green
-        case "Light Grey":
+          mainViewVariables.background = UIColor.black
+          self.navigationController?.navigationBar.barTintColor = UIColor.white
+        case "Light Gray":
           mainViewVariables.color = UIColor.lightGray
+          mainViewVariables.background = UIColor.black
+          self.navigationController?.navigationBar.barTintColor = UIColor.black
         case "Magenta":
           mainViewVariables.color = UIColor.magenta
+          mainViewVariables.background = UIColor.white
+          self.navigationController?.navigationBar.barTintColor = UIColor.white
         case "Orange":
           mainViewVariables.color = UIColor.orange
+          mainViewVariables.background = UIColor.black
+          self.navigationController?.navigationBar.barTintColor = UIColor.black
         case "Purple":
           mainViewVariables.color = UIColor.purple
+          mainViewVariables.background = UIColor.white
+        self.navigationController?.navigationBar.barTintColor = UIColor.white
         case "Red":
           mainViewVariables.color = UIColor.red
+          mainViewVariables.background = UIColor.black
+          self.navigationController?.navigationBar.barTintColor = UIColor.black
         case "Yellow":
           mainViewVariables.color = UIColor.yellow
+          mainViewVariables.background = UIColor.black
+          self.navigationController?.navigationBar.barTintColor = UIColor.black
         default:
           mainViewVariables.color = UIColor.black
+          mainViewVariables.background = UIColor.white
+          self.navigationController?.navigationBar.barTintColor = UIColor.white
       }
       editButton.setTitleTextAttributes([
       NSAttributedStringKey.font: UIFont(name: "Helvetica-Bold", size: 26.0)!,
-      NSAttributedStringKey.foregroundColor: UIColor.darkGray],
+      NSAttributedStringKey.foregroundColor: UIColor.blue],
                                       for: .normal)
       adminButton.setTitleTextAttributes([
       NSAttributedStringKey.font: UIFont(name: "Helvetica-Bold", size: 26.0)!,
-      NSAttributedStringKey.foregroundColor: UIColor.darkGray],
+      NSAttributedStringKey.foregroundColor: UIColor.blue],
                                       for: .normal)
       let titleLabel = UILabel(frame: CGRect(x: 10, y: 50, width: 230, height: 21))
       titleLabel.textAlignment = .center //For center alignment
@@ -62,6 +92,7 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
       titleLabel.textColor = mainViewVariables.color
       titleLabel.font = UIFont(name: "Helvetica-Bold", size: 30.0)
       topBar.titleView = titleLabel
+      mainMenu.backgroundColor = mainViewVariables.background
       mainMenu.dataSource = self
       mainMenu.delegate = self
       self.view.addSubview(mainMenu)
@@ -365,6 +396,7 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.present(mailVC, animated: true, completion: nil)
       }
       else {
+        print(generateStringForCSV())
         mainViewVariables.mainMenuOptions = [MainMenuOption(title: "Your mail client is not set up properly.  Please set up and try again later.", type: "Export")]
         self.mainMenu.reloadData()
         viewDidLoad()
@@ -423,7 +455,7 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var isFirst = true
     
     for question in questions {
-      if (!isFirst) {
+      if (!isFirst && (question != "")) {
         stringData.append(delimiter)
       }
       else {
@@ -436,7 +468,7 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     for submission in submissions {
       isFirst = true
       for entry in submission {
-        if (!isFirst) {
+        if (!isFirst && (entry != "")) {
           stringData.append(delimiter)
         }
         else {
@@ -459,9 +491,10 @@ class CenterViewController: UIViewController, UITableViewDelegate, UITableViewDa
 }
 
 struct mainViewVariables{
-    static var title = "iCruit"
-    static var mainMenuOptions = [MainMenuOption(title:"iCruit allows you to create a custom experience for potential applicants to give you information about themselves.", type:"Tutorial"),MainMenuOption(title:"Take a look in the Admin menu to change the questions, color of questions and titles, edit your company's name, view responses, export data via email, and finally reset the app!", type:"Tutorial"),MainMenuOption(title:"You can add up to a maximum of 20 questions.", type:"Tutorial"),MainMenuOption(title:"iCruit doesn't require a Wi-Fi connection to gather data, but you will need to be connected to export data.", type:"Tutorial"),MainMenuOption(title:"In the Lock/Unlock menu, you'll find an option to present the questions to applicants as well as lock/unlock the admin menu with a password", type:"Tutorial"),MainMenuOption(title:"Don't forget your password as you will not be able to access the data without it.", type:"Tutorial"),MainMenuOption(title:"If you do forget the password, you can reset the app by repeatedly submitting an incorrect password.", type:"Tutorial"),MainMenuOption(title:"I hope you enjoy the app, and if you have any questions, concerns or comments, email me at jordanmartin@ksu.edu.", type:"Tutorial")]
-    static var color = UIColor.black
+  static var title = "iCruit"
+  static var mainMenuOptions = [MainMenuOption(title:"iCruit allows you to create a custom experience for potential applicants to give you information about themselves.", type:"Tutorial"),MainMenuOption(title:"Take a look in the Admin menu to change the questions, color of questions and titles, edit your company's name, view responses, export data via email, and finally reset the app!", type:"Tutorial"),MainMenuOption(title:"You can add up to a maximum of 20 questions.", type:"Tutorial"),MainMenuOption(title:"iCruit doesn't require a Wi-Fi connection to gather data, but you will need to be connected to export data.", type:"Tutorial"),MainMenuOption(title:"In the Lock/Unlock menu, you'll find an option to present the questions to applicants as well as lock/unlock the admin menu with a password", type:"Tutorial"),MainMenuOption(title:"Don't forget your password as you will not be able to access the data without it.", type:"Tutorial"),MainMenuOption(title:"If you do forget the password, you can reset the app by repeatedly submitting an incorrect password.", type:"Tutorial"),MainMenuOption(title:"I hope you enjoy the app, and if you have any questions, concerns or comments, email me at jordanmartin@ksu.edu.", type:"Tutorial")]
+  static var color = UIColor.black
+  static var background = UIColor.white
 }
 
 extension CenterViewController: SidePanelViewControllerDelegate {

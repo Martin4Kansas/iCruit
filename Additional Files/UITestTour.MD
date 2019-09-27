@@ -1,55 +1,55 @@
-UI Testing Tour
+# UI Testing Tour
 1. Open admin menu by swiping right
-2. Close by swiping left
-3. Open lock/unlock menu by swiping left
-4. Close by swping right
-5. Open admin menu by clicking admin
-6. Close by clicking admin
-7. Open lock/unlock by clicking lock/unlock
-8. Close lock/unlock by clicking lock/unlock
-9. Open admin, click edit questions
-10. Add questions until 20, try to add more, but can't
-11. Open lock, click present
-12. See all questions
-13. Open admin, click edit questions
-14. Remove all but the first question
-15. Open lock, click present
-16. See the lone question
-17. Open admin, edit color
-18. Click each color followed by submit individually and see title change color
-19. Open lock, present
-20. See new color on questions
-21. Click admin, edit company name
-22. Enter a name and press submit
-23. Open lock, present
-24. See new company name
-25. Open admin, reset
-26. Hit reset, then no
-27. Hit reset, then yes
-28. Open lock, present
-29. Answer questions several times
-30. Open admin, view responses
-31. Check responses are correct
-32. Open admin, export
-33. Hit export, send the email, don't reset responses
-34. Check email was sent
-35. Open admin, view responses
-36. See the responses are still there
-37. Open admin, export
-38. Hit export, send the email, reset responses
-39. Open admin, view responses
-40. See the responses are gone
-41. Open admin, tutorial
-42. See tutorial like when app was first opened
-43. Open lock/unlock, lock/unlock
-44. Enter easy password
-45. Try wrong password to unlock, won't work
-46. Try to press admin, won't work
-47. Try swiping to open admin, will show black region, but won't open (slight bug)
-48. Open lock/unlock, lock/unlock
-49. Enter correct password and unlock
-50. Change some settings of the app in admin
-51. Open lock/unlock, lock/unlock
-52. Enter easy password and lock
-53. Try wrong password until reset
-54. Check settings are all reset
+1. Close by swiping left
+1. Open lock/unlock menu by swiping left
+1. Close by swping right
+1. Open admin menu by clicking admin
+1. Close by clicking admin
+1. Open lock/unlock by clicking lock/unlock
+1. Close lock/unlock by clicking lock/unlock
+1. Open admin, click edit questions
+1. Add questions until 20, try to add more, but can't
+1. Open lock, click present
+1. See all questions
+1. Open admin, click edit questions
+1. Remove all but the first question
+1. Open lock, click present
+1. See the lone question
+1. Open admin, edit color
+1. Click each color followed by submit individually and see title change color
+1. Open lock, present
+1. See new color on questions
+1. Click admin, edit company name
+1. Enter a name and press submit
+1. Open lock, present
+1. See new company name
+1. Open admin, reset
+1. Hit reset, then no
+1. Hit reset, then yes
+1. Open lock, present
+1. Answer questions several times
+1. Open admin, view responses
+1. Check responses are correct
+1. Open admin, export
+1. Hit export, send the email, don't reset responses
+1. Check email was sent
+1. Open admin, view responses
+1. See the responses are still there
+1. Open admin, export
+1. Hit export, send the email, reset responses
+1. Open admin, view responses
+1. See the responses are gone
+1. Open admin, tutorial
+1. See tutorial like when app was first opened
+1. Open lock/unlock, lock/unlock
+1. Enter easy password
+1. Try wrong password to unlock, won't work
+1. Try to press admin, won't work
+1. Try swiping to open admin, will show black region, but won't open (slight bug)
+1. Open lock/unlock, lock/unlock
+1. Enter correct password and unlock
+1. Change some settings of the app in admin
+1. Open lock/unlock, lock/unlock
+1. Enter easy password and lock
+1. Try wrong password until reset
+1. Check settings are all reset
